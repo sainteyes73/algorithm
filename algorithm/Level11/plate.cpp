@@ -24,55 +24,79 @@ const int MAX=30;
 char arr[MAX];
 char save[MAX];//pop을 저장
 struct Stack{
-    int capacity;
-    int len;
+    int capacity=30;
+    int len=0;
     char data[MAX];
 
-    void create(){
-        capacity=MAX;
-        len=0;
+    void push(char x){
+        if(len<capacity){
+            data[len]=x;
+            len++;
+        }
     }
-    void push(int x){
-        if(len>=capacity)    return;
-        data[len++]=x;
-    }
-    char pop(){
-        if(len<=0) return;
-        int temp=data[len];
-        data[len]=0;
-        len--;
-        return temp;
+    void pop(){
+        if(len>0){
+            data[len]=0;
+            len--;
+        }
     }
     char top(){
-        if(len<=0) return;
-        return data[len];
+        if(len>0){
+            char item;
+            item=data[len-1];
+            return item;   
+        }else{
+            return -1;
+        }
+    }
+    void current(){
+        for(int i=0;i<=len;i++){
+            cout<<data[i];
+        }
     }
 };
+
 int main(){
     bool flag;
     cin>>arr;
     Stack s;
-    s.create();
+    int result[100];
     int arr_pointer;
     char alpha='a';
     int alphapoint=0;
+    int result_point=0;
+    int i=0;
     while(1){
-        int i=0;//arr를 가리키는 포인터
         char current=arr[i];//pop해야할값
         char stacktop=s.top();//stack의 top
         if(current==stacktop){
-            save[i]=s.pop();
+            s.pop();
             i++;
+            result[result_point++]=1;
+            if(i==strlen(arr)){
+                flag=true;
+                break;
+            }
         }else{
             if(alpha=='a'+strlen(arr)){
+                flag=false;
                 break;
             }else{
                 s.push(alpha++);
                 alphapoint++;
+                result[result_point++]=0;
             }
         }
-        if(i==strlen(arr)){
-            if(arr==save) break;
+    }
+    if(flag==true){
+        for(int i=0;i<result_point;i++){
+            if(result[i]==1){
+                cout<<"pop"<<endl;
+            }else{
+                cout<<"push"<<endl;
+            }
         }
+    }else{
+        cout<<"impossible"<<endl;
     }
 }
