@@ -17,7 +17,7 @@ void spread(int y,int x){
           if(y==i&&x==j) continue;
           if(arr[i][j]==-1) continue;
           int dist=abs(i-y)+abs(j-x);
-          if(dist<=1&&dist<=k){
+          if(dist>=1&&dist<=k){
               count++;
               res[i][j]+=bad;
           } 

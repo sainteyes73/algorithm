@@ -75,7 +75,6 @@ int main() {
           int y,x,d,f,w;    
           cin>>y>>x>>d>>f>>w;
           v.push_back(make_animal(y,x,d,f,w));
-                        cout<<"asd"<<endl;
       }
 
       for(int i=1;i<=c;i++){
